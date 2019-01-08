@@ -80,12 +80,13 @@ public class Algorithm {
 	public ArrayList<Point3D> createPath()
 	{
 		ArrayList<Point3D> path=new ArrayList<Point3D>();
-
+		game=updateGame(play.getBoard());
 		Graph G = new Graph(); 
 		String source = "player";
 		String target = "fruit";
 		G.add(new Node(source));
-
+		Point3D pPlayer=new Point3D(game.getPlayer().getLocation().lat(),game.getPlayer().getLocation().lon());
+		//createEdges(G,source,pPlayer);
 		for(int i=0;i<pointsBoxes.size();i++) {
 
 			Node d = new Node(""+i);
@@ -93,10 +94,31 @@ public class Algorithm {
 
 		}
 		G.add(new Node(target)); 
+		createEdges(G,source,pPlayer);
+		createEdges(G,target,pPlayer);
+		for(int i=0;i<pointsBoxes.size();i++) {
 
+			createEdges(G,""+i,this.pointsBoxes.get(i));
+		}
 
 		return path;
 
+	}
+	public void createEdges(Graph g,String start,Point3D p)
+	{
+		ArrayList<Integer> pointPlayerSee =new ArrayList<Integer>();
+		pointPlayerSee=pointsPlayerSee(p, this.pointsBoxes);
+		if(pointPlayerSee==null)
+		{
+			return;
+		}
+		else {
+			for (int i = 0; i <pointPlayerSee.size(); i++) {
+				
+				g.addEdge(start,""+pointPlayerSee.get(i),p.distance2D(this.pointsBoxes.get(pointPlayerSee.get(i))));
+				
+			}
+		}
 	}
 	public double distanceMeter(Point3D p1,Point3D p2)
 	{
@@ -139,17 +161,17 @@ public class Algorithm {
 		return g;
 	}
 	private ArrayList<Integer> pointsPlayerSee(Point3D player,ArrayList<Point3D> pointsBoxes) {
-		
+
 		ArrayList<Integer> pointPlayerSee =new ArrayList<Integer>();
 		this.game=updateGame(play.getBoard());
 		for (int i = 0; i < pointsBoxes.size(); i++) {
 			boolean flag=true;
 			for(int j =0; j<game.sizeB();j++)
 			{
-				
+
 				if(canISee(game.getBox(j),player,pointsBoxes.get(i))==false)
 				{	
-						flag=false;	
+					flag=false;	
 				}
 			}
 			if(flag==true)
@@ -157,7 +179,7 @@ public class Algorithm {
 				pointPlayerSee.add(i);
 			}
 		}
-		
+
 
 		return pointPlayerSee;
 	}
@@ -167,12 +189,12 @@ public class Algorithm {
 		double yTarg = target.y();
 		double xPlayer = player.x();
 		double xTarg = target.x();
-		
+
 		double m = (yTarg - yPlayer) / (xTarg - xPlayer);
 		double n = yTarg - (m * xTarg);
-		
+
 		if (xPlayer <= box.getMin().x() && box.getMin().x()  <= xTarg || xTarg <= box.getMin().x()  && box.getMin().x()  <= xPlayer) {
-			
+
 
 			double y = m * (box.getMin().x() ) + n;
 
