@@ -1,6 +1,8 @@
 package Algorithm;
 import java.util.ArrayList;
 
+
+
 import Coords.GeoBox;
 import Coords.LatLonAlt;
 import GUI.Map;
@@ -12,6 +14,7 @@ import Robot.Game;
 import Robot.Packman;
 import Robot.Play;
 import graph.Graph;
+import graph.Graph_Algo;
 import graph.Node;
 
 
@@ -26,6 +29,7 @@ public class Algorithm {
 
 	public Algorithm() {
 		pointsBoxes= new ArrayList<Point3D>();
+		 GetpointsOfBoxes();
 		play=new Play();
 		game=new Game();
 		gameCopy=new Game();
@@ -34,6 +38,7 @@ public class Algorithm {
 	}
 	public Algorithm(Play play,Game gam, Game copy,int mapWidth, int mapHeight) {
 		ArrayList<Point3D> pointsBoxes= new ArrayList<Point3D>();
+		GetpointsOfBoxes();
 		this.play = play;
 		this.game = gam;
 		this.gameCopy = copy;
@@ -77,8 +82,9 @@ public class Algorithm {
 		}		
 		return pFruit;
 	}
-	public ArrayList<Point3D> createPath()
+	public ArrayList<Point3D> createPath(Point3D pFruit)
 	{
+		
 		ArrayList<Point3D> path=new ArrayList<Point3D>();
 		game=updateGame(play.getBoard());
 		Graph G = new Graph(); 
@@ -87,6 +93,7 @@ public class Algorithm {
 		G.add(new Node(source));
 		Point3D pPlayer=new Point3D(game.getPlayer().getLocation().lat(),game.getPlayer().getLocation().lon());
 		//createEdges(G,source,pPlayer);
+		pointsBoxes.add(pFruit);
 		for(int i=0;i<pointsBoxes.size();i++) {
 
 			Node d = new Node(""+i);
@@ -95,12 +102,26 @@ public class Algorithm {
 		}
 		G.add(new Node(target)); 
 		createEdges(G,source,pPlayer);
-		createEdges(G,target,pPlayer);
+		//createEdges(G,target,pPlayer);
 		for(int i=0;i<pointsBoxes.size();i++) {
 
 			createEdges(G,""+i,this.pointsBoxes.get(i));
+
+
 		}
 
+		Graph_Algo.dijkstra(G, source);
+		Node b = G.getNodeByName(target);
+//		System.out.println("***** Graph Demo for OOP_Ex4 *****");
+//		System.out.println(b);
+//		System.out.println("Dist: "+b.getDist());
+		ArrayList<String> shortestPath = b.getPath();
+		path.add(pPlayer);
+		for(int i=0;i<shortestPath.size();i++) {
+			
+			path.add(pointsBoxes.get(Integer.parseInt(shortestPath.get(i))));
+		}
+		pointsBoxes.remove(pFruit);
 		return path;
 
 	}
@@ -114,12 +135,13 @@ public class Algorithm {
 		}
 		else {
 			for (int i = 0; i <pointPlayerSee.size(); i++) {
-				
-				g.addEdge(start,""+pointPlayerSee.get(i),p.distance2D(this.pointsBoxes.get(pointPlayerSee.get(i))));
-				
+
+				g.addEdge(start,""+pointPlayerSee.get(i),distanceMeter(p,pointsBoxes.get(pointPlayerSee.get(i))));
+
 			}
 		}
 	}
+
 	public double distanceMeter(Point3D p1,Point3D p2)
 	{
 		double dis=0;
@@ -183,6 +205,7 @@ public class Algorithm {
 
 		return pointPlayerSee;
 	}
+
 	private boolean canISee(GeoBox box, Point3D player,Point3D target) {
 
 		double yPlayer = player.y();
@@ -202,7 +225,6 @@ public class Algorithm {
 				return false;
 			}
 		}
-
 		else 
 		{
 			if (yPlayer <= box.getMin().y() && box.getMin().y() <= yTarg || yTarg <= box.getMin().y() && box.getMin().y() <= yPlayer) {
