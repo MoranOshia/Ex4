@@ -20,6 +20,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import Algorithm.Algorithm;
 import Coords.GeoBox;
 import Coords.LatLonAlt;
 import Geom.Point3D;
@@ -38,9 +39,14 @@ public class window extends JFrame implements MouseListener{
 	String type="";
 	Play play1 = new Play();
 	Game game = new Game();
-	Game copyGame = new Game();
+	int w ;
+	int h;
+	
 	boolean first = true;
 	double azimuth = 0;
+
+
+
 
 	public window() {
 		initGUI();
@@ -49,14 +55,14 @@ public class window extends JFrame implements MouseListener{
 
 	public void initGUI() {
 		Menu menu = new Menu("Menu"); 
-		Menu add = new Menu("Add");
 		Menu clear = new Menu ("Clear");
 		Menu run = new Menu ("Run");
 		MenuItem openCsv = new MenuItem("Open Csv");
 		MenuItem clearGame = new MenuItem("Clear Game");
 		MenuItem play = new MenuItem("Play");
+		MenuItem playAutomatic = new MenuItem("Play automaic");
 		MenuItem setPlayer = new MenuItem("set Player");
-		MenuItem setId = new MenuItem("set Id");
+		
 
 		MenuBar menuBar = new MenuBar();
 
@@ -68,7 +74,8 @@ public class window extends JFrame implements MouseListener{
 		menu.add(openCsv);
 		menu.add(setPlayer);
 		run.add(play);
-		menu.add(setId);
+		run.add(playAutomatic);
+	
 
 
 		try {
@@ -85,7 +92,6 @@ public class window extends JFrame implements MouseListener{
 		play.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				t();
-				
 			}
 		});
 
@@ -114,18 +120,17 @@ public class window extends JFrame implements MouseListener{
 				play1 = new Play(NameFile);
 				play1.setIDs(305050437,313292633);
 				game=new Game(NameFile);
-				copyGame=new Game(game);
 				repaint();
 
 			}
 		});
 
-//		setId.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent actionEvent) {
-//				JFrame frame = new JFrame();
-//
-//			}
-//		});
+		playAutomatic.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+				playAot();
+
+			}
+		});
 		
 		clearGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
@@ -188,7 +193,7 @@ public class window extends JFrame implements MouseListener{
 		
 		String s =play1.getStatistics();
 		g.setColor(Color.white);
-		g.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 20)); 
+		g.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 20)); 
 	    g.drawString(s, 10, h-10);
 
 		
@@ -241,6 +246,14 @@ public class window extends JFrame implements MouseListener{
 		// TODO Auto-generated method stub
 
 	}
+	public int getW()
+	{
+		return this.getWidth();
+	}
+	public int getH()
+	{
+		return this.getHeight();
+	}
 
 	public double azimuth(int x, int y) {
 		Point3D p = new Point3D(Map.PixelToCoords(this.getWidth(), this.getHeight(), x, y));
@@ -248,9 +261,39 @@ public class window extends JFrame implements MouseListener{
 		double ans = m.azimuth_elevation_dist(game.getPlayer().getLocation(), p)[0];
 		return ans;
 	}
+	public void playAot() {
+		Game gameCopy = new Game(game);
+		Algorithm a = new Algorithm(play1, this.game, gameCopy, getW(), getH());
+		ArrayList<Point3D> path = new ArrayList<Point3D>();
+
+		play1.start();
+		while(a.getPlay().isRuning()) {
+			
+			Point3D fruit = new Point3D(a.closesFruit(this.game));
+			fruit = new Point3D(Map.coordsToPixel(this.getW(),this.getH() , fruit.x(), fruit.y()));
+			path = new ArrayList<Point3D>(a.createPath(fruit, this.game));
+			
+			for (int i = 0; i < path.size(); i++) {
+				System.out.println(path.get(i));
+				this.azimuth = azimuth((int)path.get(i).x(),(int) path.get(i).y());
+//				TreadsClass tr = new TreadsClass(this.play1,this.game,gameCopy,this);
+//				tr.start();
+				play1.rotate(getAzimuth());
+				repaint();
+				
+			}
+		}
+
+		
+		
+
+
+	}
 	public void t() {
 
-		TreadsClass tr = new TreadsClass(this.play1,this.game,this.copyGame,this);
+
+		Game gameCopy = new Game(game);
+		TreadsClass tr = new TreadsClass(this.play1,this.game,gameCopy,this);
 		tr.start();
 
 

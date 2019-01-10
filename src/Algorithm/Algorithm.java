@@ -1,8 +1,6 @@
 package Algorithm;
 import java.util.ArrayList;
 
-
-
 import Coords.GeoBox;
 import Coords.LatLonAlt;
 import GUI.Map;
@@ -27,9 +25,10 @@ public class Algorithm {
 	private Game gameCopy;
 	int w,h;
 
+
+
 	public Algorithm() {
 		pointsBoxes= new ArrayList<Point3D>();
-		 GetpointsOfBoxes();
 		play=new Play();
 		game=new Game();
 		gameCopy=new Game();
@@ -37,30 +36,39 @@ public class Algorithm {
 		h=0;
 	}
 	public Algorithm(Play play,Game gam, Game copy,int mapWidth, int mapHeight) {
-		ArrayList<Point3D> pointsBoxes= new ArrayList<Point3D>();
-		GetpointsOfBoxes();
+
 		this.play = play;
 		this.game = gam;
 		this.gameCopy = copy;
 		this.w=mapWidth;
 		this.h=mapHeight;
+		pointsBoxes= new ArrayList<Point3D>();
+		GetpointsOfBoxes(copy);
 	}
 
-	public void GetpointsOfBoxes()
+	public Play getPlay() {
+		return play;
+	}
+	public void setPlay(Play play) {
+		this.play = play;
+	}
+	public void GetpointsOfBoxes(Game c)
 	{
-		GeoBox box;
-		Point3D p=new Point3D(0,0,0);
-		pointsBoxes.add(p);
-		for (int i = 0; i < gameCopy.sizeB(); i++) {
 
-			box=new GeoBox(gameCopy.getBox(i));
-			p=new Point3D(box.getMin().x()+5, box.getMax().y()+5);
+		Point3D p=new Point3D(0,0,0);
+
+		for (int i = 0; i < c.sizeB(); i++) {
+
+
+			Point3D pMax = new Point3D(Map.coordsToPixel(w, h, c.getBox(i).getMax().x(), c.getBox(i).getMax().y()));
+			Point3D pMin = new Point3D( Map.coordsToPixel(w, h, c.getBox(i).getMin().x(), c.getBox(i).getMin().y()));
+			p=new Point3D(pMin.x()+5, pMax.y()+5);
 			pointsBoxes.add(p);
-			p=new Point3D(box.getMin().x()+5, box.getMin().y()+5);
+			p=new Point3D(pMin.x()+5, pMin.y()+5);
 			pointsBoxes.add(p);
-			p=new Point3D(box.getMax().x()+5, box.getMax().y()+5);
+			p=new Point3D(pMax.x()+5, pMax.y()+5);
 			pointsBoxes.add(p);
-			p=new Point3D(box.getMax().x()+5, box.getMin().y()+5);
+			p=new Point3D(pMax.x()+5, pMin.y()+5);
 			pointsBoxes.add(p);
 
 		}
@@ -82,19 +90,20 @@ public class Algorithm {
 		}		
 		return pFruit;
 	}
-	public ArrayList<Point3D> createPath(Point3D pFruit)
+	public ArrayList<Point3D> createPath(Point3D pFruit, Game windowG)
 	{
-		
 		ArrayList<Point3D> path=new ArrayList<Point3D>();
-		game=updateGame(play.getBoard());
-		Graph G = new Graph(); 
+		game=new Game(windowG);
+
+		Graph G = new Graph();
 		String source = "player";
 		String target = "fruit";
 		G.add(new Node(source));
-		Point3D pPlayer=new Point3D(game.getPlayer().getLocation().lat(),game.getPlayer().getLocation().lon());
-		//createEdges(G,source,pPlayer);
+		Point3D pPlayer=new Point3D(game.getPlayer().getLocation().x(),game.getPlayer().getLocation().y());
+
 		pointsBoxes.add(pFruit);
-		for(int i=0;i<pointsBoxes.size();i++) {
+
+		for(int i=0;i<pointsBoxes.size()-1;i++) {
 
 			Node d = new Node(""+i);
 			G.add(d);
@@ -103,7 +112,7 @@ public class Algorithm {
 		G.add(new Node(target)); 
 		createEdges(G,source,pPlayer);
 		//createEdges(G,target,pPlayer);
-		for(int i=0;i<pointsBoxes.size();i++) {
+		for(int i=0;i<pointsBoxes.size()-1;i++) {
 
 			createEdges(G,""+i,this.pointsBoxes.get(i));
 
@@ -111,21 +120,22 @@ public class Algorithm {
 		}
 
 		Graph_Algo.dijkstra(G, source);
+
 		Node b = G.getNodeByName(target);
-//		System.out.println("***** Graph Demo for OOP_Ex4 *****");
-//		System.out.println(b);
-//		System.out.println("Dist: "+b.getDist());
+		//		System.out.println("***** Graph Demo for OOP_Ex4 *****");
+		System.out.println(b);
+		//		System.out.println("Dist: "+b.getDist());
 		ArrayList<String> shortestPath = b.getPath();
 		path.add(pPlayer);
-		for(int i=0;i<shortestPath.size();i++) {
-			
+		for(int i=0;i<shortestPath.size()-1;i++) {
+
 			path.add(pointsBoxes.get(Integer.parseInt(shortestPath.get(i))));
 		}
 		pointsBoxes.remove(pFruit);
 		return path;
 
 	}
-	public void createEdges(Graph g,String start,Point3D p)
+	public void createEdges(Graph G,String start,Point3D p)
 	{
 		ArrayList<Integer> pointPlayerSee =new ArrayList<Integer>();
 		pointPlayerSee=pointsPlayerSee(p, this.pointsBoxes);
@@ -135,9 +145,12 @@ public class Algorithm {
 		}
 		else {
 			for (int i = 0; i <pointPlayerSee.size(); i++) {
-
-				g.addEdge(start,""+pointPlayerSee.get(i),distanceMeter(p,pointsBoxes.get(pointPlayerSee.get(i))));
-
+				if(pointPlayerSee.get(i)==(pointsBoxes.size()-1)) {
+					G.addEdge(start,"fruit",distanceMeter(p,pointsBoxes.get(pointPlayerSee.get(i))));
+				}
+				else {
+					G.addEdge(start,""+pointPlayerSee.get(i),distanceMeter(p,pointsBoxes.get(pointPlayerSee.get(i))));
+				}
 			}
 		}
 	}
@@ -185,28 +198,27 @@ public class Algorithm {
 	private ArrayList<Integer> pointsPlayerSee(Point3D player,ArrayList<Point3D> pointsBoxes) {
 
 		ArrayList<Integer> pointPlayerSee =new ArrayList<Integer>();
-		this.game=updateGame(play.getBoard());
+		//		this.game=updateGame(play.getBoard());
 		for (int i = 0; i < pointsBoxes.size(); i++) {
 			boolean flag=true;
 			for(int j =0; j<game.sizeB();j++)
 			{
 
-				if(canISee(game.getBox(j),player,pointsBoxes.get(i))==false)
+				if(CheckisBoxBlock(game.getBox(j),player,pointsBoxes.get(i))==false)
 				{	
-					flag=false;	
+					flag=false;
 				}
 			}
-			if(flag==true)
-			{
-				pointPlayerSee.add(i);
-			}
-		}
 
+			if(flag==true) pointPlayerSee.add(i);
+
+		}
 
 		return pointPlayerSee;
 	}
 
-	private boolean canISee(GeoBox box, Point3D player,Point3D target) {
+
+	public boolean CheckisBoxBlock(GeoBox box,Point3D player,Point3D target){
 
 		double yPlayer = player.y();
 		double yTarg = target.y();
@@ -216,25 +228,50 @@ public class Algorithm {
 		double m = (yTarg - yPlayer) / (xTarg - xPlayer);
 		double n = yTarg - (m * xTarg);
 
-		if (xPlayer <= box.getMin().x() && box.getMin().x()  <= xTarg || xTarg <= box.getMin().x()  && box.getMin().x()  <= xPlayer) {
+		Point3D pMax = new Point3D(Map.coordsToPixel(w, h, box.getMax().x(), box.getMax().y()));
+		Point3D pMin = new Point3D( Map.coordsToPixel(w, h, box.getMin().x(), box.getMin().y()));
+		Point3D pMaxMin=new Point3D(pMax.x(), pMin.y());
+		Point3D pMinMax=new Point3D(pMin.x(), pMax.y());
 
+		//pMin pMinMax
+		if (xPlayer <=pMin.x() && pMin.x()  <= xTarg || xTarg <= pMin.x()  && pMin.x()  <= xPlayer) {
 
-			double y = m * (box.getMin().x() ) + n;
+			double y = m * (pMin.x()) + n;
 
-			if (box.getMin().y() <= y && y <= box.getMax().y()|| box.getMax().y() <= y && y <= box.getMin().y()) {
+			if (pMin.y() <= y && y <= pMinMax.y()|| pMinMax.y() <= y && y <= pMin.y()) {
 				return false;
 			}
 		}
-		else 
-		{
-			if (yPlayer <= box.getMin().y() && box.getMin().y() <= yTarg || yTarg <= box.getMin().y() && box.getMin().y() <= yPlayer) {
 
-				double x = (box.getMin().y() - n) / m;
-				if (box.getMin().x()  <= x && x <=box.getMax().x()  || box.getMax().x() <= x && x <= box.getMin().x()) {
-					return false;
-				}
+		
+		//pMax pMaxMin
+		if (xPlayer <=pMax.x() && pMax.x()  <= xTarg || xTarg <= pMax.x()  && pMax.x()  <= xPlayer) {
+
+			double y = m * (pMax.x()) + n;
+
+			if (pMax.y() <= y && y <= pMaxMin.y()|| pMaxMin.y() <= y && y <= pMax.y()) {
+				return false;
 			}
 		}
+
+		//pMin pMaxMin
+		if (yPlayer <= pMin.y() && pMin.y() <= yTarg || yTarg <= pMin.y() && pMin.y() <= yPlayer) {
+
+			double x = (pMin.y() - n) / m;
+			if (pMin.x()  <= x && x <=pMaxMin.x()  || pMaxMin.x() <= x && x <= pMin.x()) {
+				return false;
+			}
+		}
+
+		//pMax pMinMax
+		if (yPlayer <= pMax.y() && pMax.y() <= yTarg || yTarg <= pMax.y() && pMax.y() <= yPlayer) {
+
+			double x = (pMax.y() - n) / m;
+			if (pMax.x()  <= x && x <=pMinMax.x()  || pMinMax.x() <= x && x <= pMax.x()) {
+				return false;
+			}
+		}
+		
 		return true;
 	}
 
