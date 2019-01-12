@@ -16,11 +16,47 @@ After this we have two options for the game:
 
 ![](https://github.com/MoranOshia/Ex4/blob/master/Project%20diagram.png)
 
-# Compering results
+# Compering results:
 
 ### Example 1:
 
-our Point :60.4	in 2019-01-12 18:42:38  Other student: 61.4 in	2019-01-12 18:01:40	|| 46.7 in 2019-01-12 17:18:42
+Our Point :60.4	in 2019-01-12 18:42:38  Other student: 61.4 in	2019-01-12 18:01:40	|| 46.7 in 2019-01-12 17:18:42
+
+### Example 2:
+
+Our Point :72.8 in 2019-01-12 18:55:48  Other student: 75 in 2019-01-12 18:01:50	|| 	46.3 in 2019-01-12 14:36:42
+
+### Example 3:
+
+Our Point :4 in	2019-01-03 19:58:53  Other student: 55.9 in	2019-01-12 19:27:20	|| 	-37	in 2019-01-12 14:25:23
+
+### Example 4:
+
+Our Point :70.6 in	2019-01-11 14:58:47 Other student: 81.2	in 2019-01-12 19:32:410	|| 	58 in 2019-01-11 12:59:48
+
+### Example 5:
+Our Point :63.6 in 2019-01-12 16:59:30:44  Other student: 79.4 in	2019-01-12 19:24:55	|| 32.5	in 2019-01-12 17:31:21
+
+### Example 6:
+Our Point :8 in	2018-12-31 13:25:07  Other student: 15 in	2019-01-12 19:28:46	|| 0 in	2019-01-10 16:50:36
+
+### Example 7:
+Our Point :8.200000000000003 in	2019-01-03 21:19:56  Other student: 37.2 in	2019-01-12 13:27:33	|| -32.8 in	2019-01-10 18:54:21
+
+### Example 8:
+Our Point :30.1 in 2019-01-12 20:20:08  Other student: 40.5 in	2019-01-12 18:28:38	|| 10.4 in 2019-01-12 18:22:00
+
+### Example 9:
+Our Point :4.0 in 2019-01-12 20:22:56  Other student: 5.5 in 2019-01-12 18:31:37	|| 1 in	2019-01-12 01:38:19	
+
+
+
+
+
+
+
+
+
 
 
 
