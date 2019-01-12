@@ -28,7 +28,10 @@ import Robot.Fruit;
 import Robot.Game;
 import Robot.Packman;
 import Robot.Play;
-
+import Thread.TreadPlayAutomatic;
+/*
+ * This class is responsible for the GUI of the game.
+ */
 
 public class window extends JFrame implements MouseListener{
 
@@ -38,21 +41,26 @@ public class window extends JFrame implements MouseListener{
 	Point3D  pPlayer = new Point3D(0, 0); 
 	String type="";
 	Play play1 = new Play();
-	Game game = new Game();
+	public Game game = new Game();
+	public Game gameCopy;
 	int w ;
 	int h;
-	
+
 	boolean first = true;
 	double azimuth = 0;
 
 
 
-
+	/*
+	 * This function is sent the menu and add the listener to the mouse in the frame.
+	 */
 	public window() {
 		initGUI();
 		this.addMouseListener(this);
 	}
-
+	/*
+	 * This function is setting the menu of the game.
+	 */
 	public void initGUI() {
 		Menu menu = new Menu("Menu"); 
 		Menu clear = new Menu ("Clear");
@@ -62,7 +70,7 @@ public class window extends JFrame implements MouseListener{
 		MenuItem play = new MenuItem("Play");
 		MenuItem playAutomatic = new MenuItem("Play automaic");
 		MenuItem setPlayer = new MenuItem("set Player");
-		
+
 
 		MenuBar menuBar = new MenuBar();
 
@@ -75,7 +83,7 @@ public class window extends JFrame implements MouseListener{
 		menu.add(setPlayer);
 		run.add(play);
 		run.add(playAutomatic);
-	
+
 
 
 		try {
@@ -88,20 +96,29 @@ public class window extends JFrame implements MouseListener{
 		catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		/*
+		 * This function is running the game by Clicks of the player on the frame.
+		 * @param ActionListener
+		 */
 		play.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				t();
 			}
 		});
 
-
+		/*
+		 * Set the Player to know where to locate him on the frame.
+		 * @param ActionListener
+		 */
 		setPlayer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				type="M";
 			}
 		});
-
+		/*
+		 * Open a frame to choose a csv file.
+		 * @param ActionListener
+		 */
 
 		openCsv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
@@ -120,18 +137,25 @@ public class window extends JFrame implements MouseListener{
 				play1 = new Play(NameFile);
 				play1.setIDs(305050437,313292633);
 				game=new Game(NameFile);
+				gameCopy = new Game(game);
 				repaint();
 
 			}
 		});
-
+		/*
+		 * This function is running the game automatically.
+		 * @param ActionListener
+		 */
 		playAutomatic.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				playAot();
 
 			}
 		});
-		
+		/*
+		 *  This function is clear the board.
+		 * @param ActionListener 
+		 */
 		clearGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				game.clear();
@@ -139,24 +163,33 @@ public class window extends JFrame implements MouseListener{
 		});
 	}
 
-
+	/*
+	 * Get function for azimuth 
+	 * @return azimuth - the angle between 2 points.
+	 */
 	public double getAzimuth() {
 		return azimuth;
 	}
-
+	/*
+	 * Set function for azimuth get an azimuth value and set him as the azimuth of the class 
+	 * @param azimuth
+	 */
 	public void setAzimuth(double azimuth) {
 		this.azimuth = azimuth;
 	}
-
+	/**
+	 * This function in painting the game for the csv the user chose to the board.
+	 * @param g
+	 */
 	public void paint(Graphics g)
 	{
 
 
 		int w = this.getWidth();
 		int h = this.getHeight();
-	
+
 		g.drawImage(myImage,0, 0, w, h, this);
-	
+
 		g.setColor(Color.pink);
 		Point3D m = Map.coordsToPixel(w, h, game.getPlayer().getLocation().x(), game.getPlayer().getLocation().y());
 		g.fillOval((int)m.x(),(int) m.y(), 30, 30);
@@ -187,16 +220,17 @@ public class window extends JFrame implements MouseListener{
 		for (int i = 0; i < game.sizeB(); i++) {
 			Point3D pMax = new Point3D( Map.coordsToPixel(w, h, game.getBox(i).getMax().lat(), game.getBox(i).getMax().lon()));
 			Point3D pMin = new Point3D( Map.coordsToPixel(w, h, game.getBox(i).getMin().lat(), game.getBox(i).getMin().lon()));
+
 			g.setColor(Color.black);
 			g.fillRect((int)pMin.x(), (int)pMax.y(), (int)Math.abs(pMax.x()-pMin.x()),(int)Math.abs(pMax.y()-pMin.y()));
 		}
-		
+
 		String s =play1.getStatistics();
 		g.setColor(Color.white);
 		g.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 20)); 
-	    g.drawString(s, 10, h-10);
+		g.drawString(s, 10, h-10);
 
-		
+
 
 
 
@@ -246,54 +280,64 @@ public class window extends JFrame implements MouseListener{
 		// TODO Auto-generated method stub
 
 	}
+	/*
+	 * Get function for the width of the frame 
+	 * @return this.getWidth() the width of the frame.
+	 */
 	public int getW()
 	{
 		return this.getWidth();
 	}
+	/*
+	 * Get function for the height of the frame 
+	 * @return this.getHeight() the height of the frame.
+	 */
 	public int getH()
 	{
 		return this.getHeight();
 	}
-
-	public double azimuth(int x, int y) {
+	/*
+	 * This function get x,y the location of the point the player want to get in the board.
+	 * and calculate the angle between them.
+	 * @param x lacation x
+	 * @param y lacation y
+	 * @return ans - the angle
+	 */
+	public double azimuth(double x, double y) {
 		Point3D p = new Point3D(Map.PixelToCoords(this.getWidth(), this.getHeight(), x, y));
 		MyCoords m = new MyCoords();
 		double ans = m.azimuth_elevation_dist(game.getPlayer().getLocation(), p)[0];
 		return ans;
 	}
+	/*
+	 * the function is responsible for the Thread on the automatic play for the game.
+	 */
 	public void playAot() {
-		Game gameCopy = new Game(game);
-		Algorithm a = new Algorithm(play1, this.game, gameCopy, getW(), getH());
-		ArrayList<Point3D> path = new ArrayList<Point3D>();
 
-		play1.start();
-		while(a.getPlay().isRuning()) {
-			
-			Point3D fruit = new Point3D(a.closesFruit(this.game));
-			fruit = new Point3D(Map.coordsToPixel(this.getW(),this.getH() , fruit.x(), fruit.y()));
-			path = new ArrayList<Point3D>(a.createPath(fruit, this.game));
-			
-			for (int i = 0; i < path.size(); i++) {
-				System.out.println(path.get(i));
-				this.azimuth = azimuth((int)path.get(i).x(),(int) path.get(i).y());
-//				TreadsClass tr = new TreadsClass(this.play1,this.game,gameCopy,this);
-//				tr.start();
-				play1.rotate(getAzimuth());
-				repaint();
-				
-			}
-		}
+		Algorithm a = new Algorithm(play1, this.game, this.gameCopy, getW(), getH());
 
-		
-		
+
+
+		TreadPlayAutomatic tra = new TreadPlayAutomatic(this.play1,this.game,this.gameCopy,this,a);
+		tra.start();
+
+
+
+
+
+
+
 
 
 	}
+	/*
+	 * the function is responsible for the Thread on the user control play in the game.
+	 */
 	public void t() {
 
 
-		Game gameCopy = new Game(game);
-		TreadsClass tr = new TreadsClass(this.play1,this.game,gameCopy,this);
+
+		TreadsClass tr = new TreadsClass(this.play1,this.game,this.gameCopy,this);
 		tr.start();
 
 
@@ -313,7 +357,7 @@ public class window extends JFrame implements MouseListener{
 		public void run() {
 			play1.start();
 			while(play1.isRuning()) {
-				
+
 				play1.rotate(getAzimuth());
 
 
@@ -325,7 +369,7 @@ public class window extends JFrame implements MouseListener{
 						Packman p = new Packman(board_data.get(i));
 						this.w.game.add(p);
 					}
-					
+
 					if(board_data.get(i).charAt(0) == 'G') {
 						Packman g = new Packman(board_data.get(i));
 						this.w.game.addGhost(g);
@@ -343,7 +387,7 @@ public class window extends JFrame implements MouseListener{
 						this.w.game.add(gameCopy.getBox(j));
 					}
 				}
-				
+
 				this.w.repaint();
 				try {
 					sleep(50);

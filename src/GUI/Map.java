@@ -4,10 +4,11 @@ package GUI;
 
 
 import Geom.Point3D;
-
+/*
+ * This Class is responsible for the convert between coords to pixels and pixels to coords
+ */
 public class Map {
-	//1033.7639174532708
-	//4327.375764
+
 	/**
 	 * The function get the size of the map and x ,y in pixel, and convert them to coords.
 	 * @param mapWidth
@@ -22,9 +23,6 @@ public class Map {
 		final double rw = 6371*1000;
 		final double pi = Math.PI;
 		double ln = Math.cos(((32.10571) * pi)/180);
-//		//32.10571,35.20238
-//		//32.10186,35.21237
-		//double xn = Math.asin(local_vector_in_meter.x()/rw)*(180/pi);
 		double ratio_x = Math.sin((35.21237 - 35.20238)*pi/180)*rw*ln/mapWidth;
 		double ratio_y = Math.sin((32.10186 - 32.10571)*pi/180)*rw/mapHeight;
 		double cSize = 1033.7639174532708;

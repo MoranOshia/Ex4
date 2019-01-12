@@ -1,7 +1,9 @@
 package GUI;
 
 import Geom.Point3D;
-
+/*
+ * this class is responsible for making element in coords like:add ,distance atc.
+ */
 
 public class MyCoords implements coords_converter{
 	

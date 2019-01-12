@@ -1,7 +1,9 @@
 package GUI;
 
 import javax.swing.JFrame;
-
+/*
+ * This class is responsible for opening the frame to make the game run.
+ */
 public class main {
 
 	public static void main(String[] args) {
