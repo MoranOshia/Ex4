@@ -1,5 +1,7 @@
 # Ex4
 
+Israel Buskila i.d. 305050437 Moran Oshia i.d. 313292633
+
 This project is the continue of the third assignment of the Pacman game. 
 As same as the third project the pacman eats the fruit on the screen, however in this project, we added to the original's pacmans and their fruit, ghosts, black boxes and a player. 
 In this project the player need to beat the pacmam and get to the fruits before the pacman to earn more points. 
