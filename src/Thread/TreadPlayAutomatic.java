@@ -3,7 +3,7 @@ package Thread;
 import java.util.ArrayList;
 
 import Algorithm.Algorithm;
-import GUI.Map;
+import Coords.Map;
 import GUI.window;
 import Geom.Point3D;
 import Robot.Fruit;

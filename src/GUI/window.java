@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.Color;
+
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Menu;
@@ -23,11 +24,14 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import Algorithm.Algorithm;
 import Coords.GeoBox;
 import Coords.LatLonAlt;
+import Coords.Map;
+import Coords.MyCoords;
 import Geom.Point3D;
 import Robot.Fruit;
 import Robot.Game;
 import Robot.Packman;
 import Robot.Play;
+import Thread.ThreadPlay;
 import Thread.TreadPlayAutomatic;
 /*
  * This class is responsible for the GUI of the game.
@@ -102,7 +106,7 @@ public class window extends JFrame implements MouseListener{
 		 */
 		play.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
-				t();
+				play();
 			}
 		});
 
@@ -230,15 +234,11 @@ public class window extends JFrame implements MouseListener{
 		g.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 20)); 
 		g.drawString(s, 10, h-10);
 
-
-
-
-
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent arg) {
-		// TODO Auto-generated method stub
+		
 		System.out.println("mouse Clicked");
 		System.out.println("("+ arg.getX() + "," + arg.getY() +")");
 
@@ -259,13 +259,13 @@ public class window extends JFrame implements MouseListener{
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
@@ -316,85 +316,18 @@ public class window extends JFrame implements MouseListener{
 
 		Algorithm a = new Algorithm(play1, this.game, this.gameCopy, getW(), getH());
 
-
-
 		TreadPlayAutomatic tra = new TreadPlayAutomatic(this.play1,this.game,this.gameCopy,this,a);
 		tra.start();
-
-
-
-
-
-
-
-
 
 	}
 	/*
 	 * the function is responsible for the Thread on the user control play in the game.
 	 */
-	public void t() {
+	public void play() {
 
-
-
-		TreadsClass tr = new TreadsClass(this.play1,this.game,this.gameCopy,this);
+		ThreadPlay tr = new ThreadPlay(this.play1,this.game,this.gameCopy,this);
 		tr.start();
 
-
 	}
-	public class TreadsClass extends Thread{
-		private Play play1 ;
-		private Game game ;
-		private Game gameCopy ;
-		private window w;
-
-		public TreadsClass(Play pl, Game gam, Game copy, window w) {
-			this.play1 = pl;
-			this.game = gam;
-			this.gameCopy = copy;
-			this.w = w;
-		}
-		public void run() {
-			play1.start();
-			while(play1.isRuning()) {
-
-				play1.rotate(getAzimuth());
-
-
-				this.w.game = new Game();
-				ArrayList<String> board_data = play1.getBoard();
-				for (int i = 0; i < board_data.size(); i++) {
-
-					if(board_data.get(i).charAt(0) == 'P') {
-						Packman p = new Packman(board_data.get(i));
-						this.w.game.add(p);
-					}
-
-					if(board_data.get(i).charAt(0) == 'G') {
-						Packman g = new Packman(board_data.get(i));
-						this.w.game.addGhost(g);
-					}
-					if(board_data.get(i).charAt(0) == 'M') {
-						Packman m = new Packman(board_data.get(i));
-						this.w.game.setPlayer(m);
-					}
-
-					if(board_data.get(i).charAt(0) == 'F') {
-						Fruit f  = new Fruit(board_data.get(i));
-						this.w.game.add(f);
-					}
-					for (int j = 0; j < gameCopy.sizeB(); j++) {
-						this.w.game.add(gameCopy.getBox(j));
-					}
-				}
-
-				this.w.repaint();
-				try {
-					sleep(50);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
+	
 }

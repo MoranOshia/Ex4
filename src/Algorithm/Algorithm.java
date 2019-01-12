@@ -3,8 +3,8 @@ import java.util.ArrayList;
 
 import Coords.GeoBox;
 import Coords.LatLonAlt;
-import GUI.Map;
-import GUI.MyCoords;
+import Coords.Map;
+import Coords.MyCoords;
 import GUI.window;
 import Geom.Point3D;
 import Robot.Fruit;
