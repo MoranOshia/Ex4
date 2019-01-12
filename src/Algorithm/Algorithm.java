@@ -93,8 +93,6 @@ public class Algorithm {
 
 			p=new Point3D(pMax.x()+30, pMin.y()+30);
 			pointsBoxes.add(p);
-
-
 		}
 	}
 	/*
@@ -170,21 +168,17 @@ public class Algorithm {
 
 	}
 	/*
-	 * This function is resposible for creating edges to all the points of the boxes and the player and the fruits.
+	 * This function is responsible for creating edges to all the points of the boxes and the player and the fruits.
 	 * all by getting the graph, the string of the point and the point.
 	 * @param Graph G - the graph for the game
 	 * @param String start - the name of the point we check
-	 * @param Point3D p - the point we creat edges for.
+	 * @param Point3D p - the point we create edges for.
 	 */
 
 	public void createEdges(Graph G,String start,Point3D p)
 	{
 		ArrayList<Integer> pointPlayerSee ;
 		pointPlayerSee= new ArrayList<Integer>(pointsPlayerSee(p, this.pointsBoxes));
-		//		if(pointPlayerSee==null)
-		//		{
-		//			return;
-		//		}
 		if(pointPlayerSee!=null) {
 			for (int i = 0; i <pointPlayerSee.size(); i++) {
 				if(pointPlayerSee.get(i)==(pointsBoxes.size()-1)) {
@@ -290,14 +284,10 @@ public class Algorithm {
 		double n = yTarg - (m * xTarg);
 
 		Point3D pMax = new Point3D(Map.coordsToPixel(w, h, box.getMax().x(), box.getMax().y()));
-		System.out.println("maxMax: "+pMax);
 		Point3D pMin = new Point3D( Map.coordsToPixel(w, h, box.getMin().x(), box.getMin().y()));
-		System.out.println("minMin: "+pMin);
 		Point3D pMaxMin=new Point3D(pMax.x(), pMin.y());
-		System.out.println("maxMin: "+pMaxMin);
 		Point3D pMinMax=new Point3D(pMin.x(), pMax.y());
 
-		System.out.println("minMax: "+pMinMax);
 		//pMin pMinMax
 		if (xPlayer <=pMin.x() && pMin.x()  <= xTarg || xTarg <= pMin.x()  && pMin.x()  <= xPlayer) {
 

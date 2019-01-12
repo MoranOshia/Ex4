@@ -82,8 +82,10 @@ public class SqlGame {
 			}
 			
 			this.myPlace =place+1;
-			
+			System.out.println("My Place : "+ place);
 			System.out.println("My Place : "+ myPlace+ "For Example: "+ map);
+			System.out.println("My Place : "+ place+2);
+			
 
 		}
 

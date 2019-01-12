@@ -15,35 +15,18 @@ public class MyCoords implements coords_converter{
 	
 	@Override
 	public Point3D add(Point3D gps, Point3D local_vector_in_meter) {
-//		// TODO Auto-generated method stub
-//		double ln = Math.cos((gps.x()*pi)/180);
-//		double xn = Math.asin(local_vector_in_meter.y()/rw)*(180/pi);
-//		double yn = Math.asin(local_vector_in_meter.y()/(ln*rw))*(180/pi);
-//		Point3D new_gps = new Point3D(gps.x()+xn, gps.y()+yn, gps.z()+local_vector_in_meter.z());
-//		return new_gps;
-		
+
 		double lat=gps.x();
-
 		double lon=gps.y();
-
 		double dn=local_vector_in_meter.x();
-
 		double de=local_vector_in_meter.y();
-
 		double dLat = dn/rw;
-
 		double dLon = de/(rw*Math.cos(Math.PI*lat/180));
 
-
-
 	    //OffsetPosition, decimal degrees
-
 		double latO = lat + dLat * 180/Math.PI;
-
 		double lonO = lon + dLon * 180/Math.PI;
-
 		double alt=gps.z()+local_vector_in_meter.z();
-
 		Point3D gps1=new Point3D(latO,lonO,alt);
 
 		return gps1;
@@ -79,7 +62,6 @@ public class MyCoords implements coords_converter{
 	    double x1 = gps1.x()*pi/180;
 	    double dY=gps1.y()- gps0.y();
 	    double delta = (dY*pi)/180;
-
 	    double x = Math.sin(delta) * Math.cos(x1);
 	    double y = Math.cos(x0) * Math.sin(x1) - Math.sin(x0)*Math.cos(x1)*Math.cos(delta);
 	    double azimuth = Math.atan2(x,y);

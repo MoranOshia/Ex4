@@ -31,6 +31,7 @@ import Robot.Fruit;
 import Robot.Game;
 import Robot.Packman;
 import Robot.Play;
+import Sql.SqlGame;
 import Thread.ThreadPlay;
 import Thread.TreadPlayAutomatic;
 /*
@@ -233,6 +234,7 @@ public class window extends JFrame implements MouseListener{
 		g.setColor(Color.white);
 		g.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 20)); 
 		g.drawString(s, 10, h-10);
+//		SqlGame sg= new SqlGame(s, 1);
 
 	}
 

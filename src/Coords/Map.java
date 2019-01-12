@@ -1,8 +1,4 @@
 package Coords;
-
-
-
-
 import Geom.Point3D;
 /*
  * This Class is responsible for the convert between coords to pixels and pixels to coords
@@ -19,7 +15,7 @@ public class Map {
 	 */
 	public static  Point3D PixelToCoords(int mapWidth, int mapHeight, double x, double y) {
 		
-		////////////////////////////////////////////////////
+		
 		final double rw = 6371*1000;
 		final double pi = Math.PI;
 		double ln = Math.cos(((32.10571) * pi)/180);
@@ -33,7 +29,6 @@ public class Map {
 		
 		Point3D v = new Point3D((y) * (ratio_y), (x) * ratio_x);
 		Point3D r= new Point3D(m.add(p, v));
-		//System.out.println("convert"+r.toString());
 		return r;
 	}
 	/**
@@ -49,16 +44,8 @@ public class Map {
 		final double rw = 6371*1000;
 		final double pi = Math.PI;
 		double ln = Math.cos(((32.10571) * pi)/180);
-//		//32.10571,35.20238
-//		//32.10186,35.21237
-		//double xn = Math.asin(local_vector_in_meter.x()/rw)*(180/pi);
 		double ratio_x = Math.sin((35.21237 - 35.20238)*pi/180)*rw*ln/mapWidth;
 		double ratio_y = Math.sin((32.10186 - 32.10571)*pi/180)*rw/mapHeight;
-//		
-//		double cSize = 1033.7639174532708;
-//		double pSize = Math.sqrt(Math.pow((mapWidth), 2)+Math.pow(mapHeight, 2));
-//		double ratio = cSize / pSize;
-//		System.out.println(ratio);
 		double xn = x - 35.20238;
 		double yn = y - 32.10571;
 		
@@ -72,8 +59,6 @@ public class Map {
 		yn =  (yn) /ratio_y;
 		int xn1 = (int)xn+1;
 		int yn1 = (int)yn+1;
-		
-		//System.out.println("pixel: ("+xn1+","+yn1+")");
 		
 		return new Point3D(xn1,yn1);
 	
@@ -92,8 +77,8 @@ public class Map {
 		Point3D p2 = PixelToCoords(mapWidth, mapHeight, fruit.x(), fruit.y());
 		return m.distance3d(p1, p2);
 	}
-	public static void main(String[] args) {
-	//	Point3D p =new Point3D(32.10241771028104,35.2075179134491)
-	}
+//	public static void main(String[] args) {
+//	//	Point3D p =new Point3D(32.10241771028104,35.2075179134491)
+//	}
 
 }
