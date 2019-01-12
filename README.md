@@ -16,9 +16,10 @@ After this we have two options for the game:
 
 ![](https://github.com/MoranOshia/Ex4/blob/master/Project%20diagram.png)
 
-## Compering results
+# Compering results
 
-** Example 1:**
+## Example 1:
+
 our Point :60.4	in 2019-01-12 18:42:38  Other student: 61.4 in	2019-01-12 18:01:40	|| 46.7 in 2019-01-12 17:18:42
 
 
