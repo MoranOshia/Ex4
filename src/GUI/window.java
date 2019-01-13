@@ -94,17 +94,13 @@ public class window extends JFrame implements MouseListener{
 
 		try {
 			myImage = ImageIO.read(new File("Ariel1.png"));
-			//			cherryImg = ImageIO.read(new File("cherry.png"));
-			//			packmanImg = ImageIO.read(new File("packman.png"));
-			//			ghostImg = ImageIO.read(new File("ghost.png"));
-			//			playerImg = ImageIO.read(new File("player.png"));
 		}
 		catch (IOException e) {
 			e.printStackTrace();
 		}
 		/*
 		 * This function is running the game by Clicks of the player on the frame.
-		 * @param ActionListener
+		 * @param ActionListener 
 		 */
 		play.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
