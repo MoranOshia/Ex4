@@ -6,21 +6,12 @@
     <position height="377" width="306" x="38" y="19"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <class id="2" language="java" name="Algorithm.Algorithm" project="Ex4_OOP" 
-    file="/Ex4_OOP/src/Algorithm/Algorithm.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="226" width="202" x="93" y="107"/>    
-    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <package id="3" language="java" name="GUI" project="Ex4_OOP" file="/Ex4_OOP/src/GUI" binary="false" 
+  <package id="2" language="java" name="GUI" project="Ex4_OOP" file="/Ex4_OOP/src/GUI" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="295" width="357" x="533" y="3"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <class id="4" language="java" name="GUI.main" project="Ex4_OOP" file="/Ex4_OOP/src/GUI/main.java" binary="false" 
+  <class id="3" language="java" name="GUI.main" project="Ex4_OOP" file="/Ex4_OOP/src/GUI/main.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="803" y="125"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -29,7 +20,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="GUI.window" project="Ex4_OOP" file="/Ex4_OOP/src/GUI/window.java" binary="false" 
+  <class id="4" language="java" name="GUI.window" project="Ex4_OOP" file="/Ex4_OOP/src/GUI/window.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="137" width="145" x="560" y="112"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -38,12 +29,12 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <package id="6" language="java" name="Sql" project="Ex4_OOP" file="/Ex4_OOP/src/Sql" binary="false" 
+  <package id="5" language="java" name="Sql" project="Ex4_OOP" file="/Ex4_OOP/src/Sql" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="308" width="287" x="56" y="506"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <class id="7" language="java" name="Sql.SqlGame" project="Ex4_OOP" file="/Ex4_OOP/src/Sql/SqlGame.java" binary="false" 
+  <class id="6" language="java" name="Sql.SqlGame" project="Ex4_OOP" file="/Ex4_OOP/src/Sql/SqlGame.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="184" y="681"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -52,12 +43,12 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <package id="8" language="java" name="Thread" project="Ex4_OOP" file="/Ex4_OOP/src/Thread" binary="false" 
+  <package id="7" language="java" name="Thread" project="Ex4_OOP" file="/Ex4_OOP/src/Thread" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="327" width="406" x="406" y="479"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <class id="9" language="java" name="Thread.TreadPlayAutomatic" project="Ex4_OOP" 
+  <class id="8" language="java" name="Thread.TreadPlayAutomatic" project="Ex4_OOP" 
     file="/Ex4_OOP/src/Thread/TreadPlayAutomatic.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="162" width="172" x="431" y="618"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -66,12 +57,12 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <package id="10" language="java" name="Coords" project="Ex4_OOP" file="/Ex4_OOP/src/Coords" binary="false" 
+  <package id="9" language="java" name="Coords" project="Ex4_OOP" file="/Ex4_OOP/src/Coords" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="443" width="481" x="934" y="349"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <interface id="11" language="java" name="Coords.coords_converter" project="Ex4_OOP" 
+  <interface id="10" language="java" name="Coords.coords_converter" project="Ex4_OOP" 
     file="/Ex4_OOP/src/Coords/coords_converter.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="155" width="172" x="1229" y="445"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -80,7 +71,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="12" language="java" name="Coords.Map" project="Ex4_OOP" file="/Ex4_OOP/src/Coords/Map.java" binary="false" 
+  <class id="11" language="java" name="Coords.Map" project="Ex4_OOP" file="/Ex4_OOP/src/Coords/Map.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1092" y="700"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -89,7 +80,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="Coords.MyCoords" project="Ex4_OOP" file="/Ex4_OOP/src/Coords/MyCoords.java" 
+  <class id="12" language="java" name="Coords.MyCoords" project="Ex4_OOP" file="/Ex4_OOP/src/Coords/MyCoords.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="154" width="193" x="999" y="407"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -98,7 +89,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="Thread.ThreadPlay" project="Ex4_OOP" file="/Ex4_OOP/src/Thread/ThreadPlay.java" 
+  <class id="13" language="java" name="Thread.ThreadPlay" project="Ex4_OOP" file="/Ex4_OOP/src/Thread/ThreadPlay.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="147" width="179" x="617" y="543"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -107,121 +98,77 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
+  <dependency id="14">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
   <dependency id="15">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="5"/>  
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="8"/>  
   </dependency>  
   <dependency id="16">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="5"/>  
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="12"/>  
   </dependency>  
   <dependency id="17">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="12"/>  
+  </dependency>  
+  <realization id="18">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
+  <dependency id="19">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="13"/>  
-  </dependency>  
-  <dependency id="18">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="13"/>  
-  </dependency>  
-  <dependency id="19">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="12"/>  
   </dependency>  
   <dependency id="20">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="12"/>  
-  </dependency>  
-  <realization id="21">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="11"/>  
-  </realization>  
-  <dependency id="22">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="13"/>  
-  </dependency>  
-  <dependency id="23">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="12"/>  
-  </dependency>  
-  <dependency id="24">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="13"/>  
-  </dependency>  
-  <dependency id="25">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="14"/>  
-  </dependency>  
-  <association id="26">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="27" name="a">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="28" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="29">    
     <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="14"/>  
+    <end type="TARGET" refId="4"/>  
   </dependency>  
-  <dependency id="30">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="13"/>  
-  </dependency>  
-  <dependency id="31">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="2"/>  
-  </dependency>  
-  <dependency id="32">    
+  <dependency id="21">    
     <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="5"/>  
+    <end type="TARGET" refId="11"/>  
   </dependency>  
-  <association id="33">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="34" name="w"/>      
-      <multiplicity id="35" minimum="0" maximum="1"/>    
+  <association id="22">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="23" name="w">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="24" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="36">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="12"/>  
+  <dependency id="25">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="13"/>  
   </dependency>  
-  <dependency id="37">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="2"/>  
-  </dependency>  
-  <dependency id="38">    
+  <dependency id="26">    
     <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <dependency id="27">    
+    <end type="SOURCE" refId="11"/>    
     <end type="TARGET" refId="12"/>  
   </dependency>  
-  <dependency id="39">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="9"/>  
-  </dependency>  
-  <association id="40">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="41" name="w">        
+  <association id="28">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="29" name="w">        
         <position height="0" width="0" x="-44" y="-92"/>      
       </attribute>      
-      <multiplicity id="42" minimum="0" maximum="1">        
+      <multiplicity id="30" minimum="0" maximum="1">        
         <position height="0" width="0" x="-44" y="-92"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="43">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="12"/>  
-  </dependency>  
-  <dependency id="44">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="2"/>  
+  <dependency id="31">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="11"/>  
   </dependency>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    

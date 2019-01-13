@@ -1,6 +1,7 @@
 package Algorithm;
 import java.util.ArrayList;
 
+
 import Coords.GeoBox;
 import Coords.LatLonAlt;
 import Coords.Map;
@@ -82,16 +83,16 @@ public class Algorithm {
 
 			Point3D pMax = new Point3D(Map.coordsToPixel(w, h, c.getBox(i).getMax().x(), c.getBox(i).getMax().y()));
 			Point3D pMin = new Point3D( Map.coordsToPixel(w, h, c.getBox(i).getMin().x(), c.getBox(i).getMin().y()));
-			p=new Point3D(pMin.x()+30, pMax.y()+30);
+			p=new Point3D(pMin.x()-10, pMax.y()-10);
 
 			pointsBoxes.add(p);
-			p=new Point3D(pMin.x()+30, pMin.y()+30);
+			p=new Point3D(pMin.x()-10, pMin.y()+10);
 
 			pointsBoxes.add(p);
-			p=new Point3D(pMax.x()+30, pMax.y()+30);
+			p=new Point3D(pMax.x()+10, pMax.y()-10);
 			pointsBoxes.add(p);
 
-			p=new Point3D(pMax.x()+30, pMin.y()+30);
+			p=new Point3D(pMax.x()+10, pMin.y()+10);
 			pointsBoxes.add(p);
 		}
 	}
@@ -134,7 +135,7 @@ public class Algorithm {
 		String target = "fruit";
 		G.add(new Node(source));
 		Packman pack = new Packman(play.getBoard().get(0));
-		Point3D pPlayer=new Point3D(Map.coordsToPixel(w, h, pack.getLocation().x(), pack.getLocation().y()));
+		Point3D pPlayer=new Point3D( pack.getLocation().x(), pack.getLocation().y());
 		pointsBoxes.add(pFruit);
 
 		for(int i=0;i<pointsBoxes.size()-1;i++) {
@@ -153,15 +154,12 @@ public class Algorithm {
 
 
 		Node b = G.getNodeByName(target);
-		System.out.println(b);
+		//System.out.println(b);
 		ArrayList<String> shortestPath = b.getPath();
-		//		path.add(pPlayer);
 		for(int i=1;i<shortestPath.size();i++) {
-			//			if(shortestPath.get(i).equals("player"))
-			//				path.add(pPlayer);
-			//			else {
+			
 			path.add(pointsBoxes.get(Integer.parseInt(shortestPath.get(i))));
-			//			}
+
 		}
 		pointsBoxes.remove(pFruit);
 		return path;
@@ -190,12 +188,12 @@ public class Algorithm {
 			}
 		}
 	}
-/*
- * This function is calculating distance of two point by meters.
- * @param p1- first point
- * @param p2-second point 
- * @return dis- the distance between them.
- */
+	/*
+	 * This function is calculating distance of two point by meters.
+	 * @param p1- first point
+	 * @param p2-second point 
+	 * @return dis- the distance between them.
+	 */
 	public double distanceMeter(Point3D p1,Point3D p2)
 	{
 		double dis=0;
@@ -205,11 +203,11 @@ public class Algorithm {
 		dis=m.distance3d(p1C, p2C);
 		return dis;
 	}
-/*
- * This function is updating the game by the board data (ArrayList of String for the Play object)
- * @param ArrayList<String> board_data -board data for play
- * @return g- the update game.
- */
+	/*
+	 * This function is updating the game by the board data (ArrayList of String for the Play object)
+	 * @param ArrayList<String> board_data -board data for play
+	 * @return g- the update game.
+	 */
 	public Game updateGame(ArrayList<String> board_data)
 	{
 		Game g=new Game();
@@ -241,13 +239,13 @@ public class Algorithm {
 		this.game=new Game(g);
 		return g;
 	}
-/*
- * This function is making a ArrayList<Integer> which had the points that the player can see i.e. 
- * that not blocked by the boxes.
- * @param Point3D player - the point of the player
- * @param ArrayList<Point3D> pointsBoxes - the points of the boxes
- * return pointPlayerSee- array of the index of the point that the player sees.
- */
+	/*
+	 * This function is making a ArrayList<Integer> which had the points that the player can see i.e. 
+	 * that not blocked by the boxes.
+	 * @param Point3D player - the point of the player
+	 * @param ArrayList<Point3D> pointsBoxes - the points of the boxes
+	 * return pointPlayerSee- array of the index of the point that the player sees.
+	 */
 	private ArrayList<Integer> pointsPlayerSee(Point3D player,ArrayList<Point3D> pointsBoxes) {
 
 		ArrayList<Integer> pointPlayerSee =new ArrayList<Integer>();
@@ -266,13 +264,13 @@ public class Algorithm {
 		return pointPlayerSee;
 	}
 
-/*
- * This function is return true or false if a specific box is blocking point to other point.
- * @param GeoBox box- box we check if block
- * @param Point3D player - first point
- * @param Point3D target - second point
- * @return true/false if blocked.
- */
+	/*
+	 * This function is return true or false if a specific box is blocking point to other point.
+	 * @param GeoBox box- box we check if block
+	 * @param Point3D player - first point
+	 * @param Point3D target - second point
+	 * @return true/false if blocked.
+	 */
 	public boolean CheckisBoxBlock(GeoBox box,Point3D player,Point3D target){
 
 		double yPlayer = player.y();
@@ -312,7 +310,7 @@ public class Algorithm {
 		//pMin pMaxMin
 		if (yPlayer <= pMin.y() && pMin.y() <= yTarg || yTarg <= pMin.y() && pMin.y() <= yPlayer) {
 
-			double x = (pMin.y() - n) / m;
+			double x = (pMin.y() - n) / m + xPlayer;
 			if (pMin.x()  <= x && x <=pMaxMin.x()  || pMaxMin.x() <= x && x <= pMin.x()) {
 				return false;
 			}
@@ -321,7 +319,7 @@ public class Algorithm {
 		//pMax pMinMax
 		if (yPlayer <= pMax.y() && pMax.y() <= yTarg || yTarg <= pMax.y() && pMax.y() <= yPlayer) {
 
-			double x = (pMax.y() - n) / m;
+			double x = (pMax.y() - n) / m + xPlayer;
 			if (pMax.x()  >= x && x >=pMinMax.x()  || pMinMax.x() <= x && x <= pMax.x()) {
 				return false;
 			}
@@ -330,7 +328,19 @@ public class Algorithm {
 		return true;
 	}
 
-
+//	public static void main(String[] args) {
+//
+//		Algorithm a =new Algorithm();
+//		Play p=new Play("C:\\Users\\moran\\eclipse-workspace\\Ex4_v0.2\\Ex4_OOP\\data\\Ex4_OOP_example5.csv");
+//		Game g=new Game("C:\\Users\\moran\\eclipse-workspace\\Ex4_v0.2\\Ex4_OOP\\data\\Ex4_OOP_example5.csv");
+//	
+//		a =new Algorithm(p,g,g,1433,642);
+//		//Point3D fruit = new Point3D(g.getTarget(0));
+//		fruit = new Point3D(Map.coordsToPixel(1433,642,fruit.x(), fruit.y()));
+//		 ArrayList<Point3D> path = new ArrayList<Point3D>(a.createPath(fruit, g));
+//		
+//		
+//	}
 }
 
 

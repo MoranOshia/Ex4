@@ -2,6 +2,7 @@ package Thread;
 
 import java.util.ArrayList;
 
+
 import Algorithm.Algorithm;
 import Coords.Map;
 import GUI.window;
@@ -45,11 +46,13 @@ public class TreadPlayAutomatic extends Thread{
 
 		play1.start();
 		while(play1.isRuning() && this.w.game.getTargets().size() != 0) {
+	
 			Point3D fruit = new Point3D(a.closesFruit(this.w.game));
 			fruit = new Point3D(Map.coordsToPixel(this.w.getW(),this.w.getH() , fruit.x(), fruit.y()));
 			path = new ArrayList<Point3D>(a.createPath(fruit, this.w.game));
 			path.add(fruit);
 			for (int i = 0; i < path.size() ; i++) {
+				//System.out.println(" path "+ path.get(i));
 				this.w.setAzimuth(this.w.azimuth(path.get(i).x(), path.get(i).y())); 
 				play1.rotate(this.w.getAzimuth());this.w.game = new Game();
 				ArrayList<String> board_data = play1.getBoard();
