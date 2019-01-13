@@ -99,7 +99,7 @@ public class window extends JFrame implements MouseListener{
 			e.printStackTrace();
 		}
 		/*
-		 * This function is running the game by Clicks of the player on the frame.
+		 * This function is running the game by Clicks of the player on the frame board.
 		 * @param ActionListener 
 		 */
 		play.addActionListener(new ActionListener() {

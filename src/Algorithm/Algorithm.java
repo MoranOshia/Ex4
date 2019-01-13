@@ -316,7 +316,7 @@ public class Algorithm {
 			}
 		}
 
-		//pMax pMinMax
+		//pMax pMinMax point
 		if (yPlayer <= pMax.y() && pMax.y() <= yTarg || yTarg <= pMax.y() && pMax.y() <= yPlayer) {
 
 			double x = (pMax.y() - n) / m + xPlayer;
